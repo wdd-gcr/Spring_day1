@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+    <context:property-placeholder location="jdbc.properties" ></context:property-placeholder>
+    <bean id="MyConnection" class="com.baizhi.factorybean.MyConnection">
+        <property name="driver" value="${driver}"></property>
+        <property name="url" value="${url}"></property>
+        <property name="username" value="${name}"></property>
+        <property name="password" value="${password}"></property>
+    </bean>
+
+    <bean id="user" class="com.baizhi.entity.User">
+        <property name="id" value="1"></property>
+        <property name="name" value="小香"></property>
+        <property name="password" value="123456"></property>
+    </bean>
+    <!-- 静态代理设计-->
+    <bean id="ServiceLX" class="com.baizhi.service.ServiceLXImpl">
+    </bean>
+
+    <!-- 动态代理设计 额外功能的相关信息-->
+    <bean id="ServiceLXWai" class="com.baizhi.service.ServiceLXWai"></bean>
+    <!--配置切入点-->
+    <aop:config>
+        <aop:pointcut id="pc" expression="execution(* *(..))"></aop:pointcut>
+        <aop:advisor advice-ref="ServiceLXWai" pointcut-ref="pc"></aop:advisor>
+    </aop:config>
+</beans>
