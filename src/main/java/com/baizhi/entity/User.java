@@ -11,6 +11,7 @@ public class User {
 
     public User() { }
 
+//有参构造
     public User(String id, String name, String password) {
         this.id = id;
         this.name = name;
