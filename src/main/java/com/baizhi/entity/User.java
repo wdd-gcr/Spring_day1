@@ -2,6 +2,8 @@ package com.baizhi.entity;
 
 import java.util.Objects;
 
+
+//这是第二次测试
 public class User {
     private  String id;
     private String name;
